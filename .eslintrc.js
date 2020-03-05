@@ -40,6 +40,7 @@ module.exports = {
         'prefer-arrow-callback': 'off',
         'no-param-reassign': 'off',
         'operator-linebreak': ['error', 'before', { overrides: { '=': 'none', '+': 'after' } }],
+        'max-classes-per-file': 'off',
       },
     },
   ],
