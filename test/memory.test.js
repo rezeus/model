@@ -88,14 +88,14 @@ describe('Example Memory Model Tests', function () {
       }, 1000);
     }).slow(1200);
 
-    it('2', function () {
+    it('should delete a user by its ID (1/2)', function () {
       const wasJohnDeleted = User.deleteById(lastCreatedId);
 
       assert.isTrue(wasJohnDeleted);
       assert.isFalse(mem.has(lastCreatedId));
     });
 
-    it('2-2', function () {
+    it('should delete a user by its ID (2/2)', function () {
       assert.isFalse(mem.has(lastCreatedId));
 
       const wasJohnDeleted = User.deleteById(lastCreatedId);

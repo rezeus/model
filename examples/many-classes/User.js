@@ -5,6 +5,17 @@ const bcrypt = require('bcrypt');
 const MemoryModel = require('../data-store-ops/MemoryModel');
 
 class User extends MemoryModel {
+  /**
+   * @returns {Array<String>}
+   */
+  static get jsonExcludedFieldNames() {
+    return [
+      'password',
+    ];
+  }
+
+  // Fields
+  //
   /** @type {String} */
   get email() {
     return this.getField('email');

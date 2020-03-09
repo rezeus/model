@@ -39,6 +39,9 @@ const mem = MemoryModel.mem;
   john.name = 'John Doe';
   await john.save();
 
+  const jsonJohn = john.toJSON();
+  assert(!Object.prototype.hasOwnProperty.call(jsonJohn, 'password'));
+
   johnFromStore = mem.get(john.id);
 
   assert(john.firstname === 'John', 'Virtual field for User.name is invalid.');
@@ -46,5 +49,16 @@ const mem = MemoryModel.mem;
   assert(john.lastname === 'Doe', 'Virtual field for User.name is invalid.');
   assert(johnFromStore.lastname === 'Doe', 'Virtual field for User.name is invalid.');
 
+
+  const post = new Post();
+
+  post.title = 'My First Post';
+  post.body = 'lorem ipsum dolor sit amet';
+
+  await post.save();
+
+  const postFromStore = mem.get(post.id);
+
   //
+  debugger;
 })();
