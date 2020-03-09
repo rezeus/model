@@ -4,8 +4,10 @@ const { assert } = require('chai');
 
 const Model = require('../lib/Model');
 
+const NotImplementedError = require('../lib/errors/NotImplementedError');
+
 describe('Model Tests', function () {
-  it.only('should have static methods', function () {
+  it('should have static methods', function () {
     assert.typeOf(Model.find, 'function'); // TODO Those are unimplemented - So extending classes should return an instance of this class
     assert.typeOf(Model.findById, 'function'); // TODO Those are unimplemented - So extending classes should return an instance of this class
     assert.typeOf(Model.updateById, 'function');
@@ -47,21 +49,35 @@ describe('Model Tests', function () {
   });
 
   describe.only('Extending Class 1 (User) Tests', function () {
-    class User extends Model {
-      //
-    }
+    class User extends Model {}
+
+    it('should throw error when trying to use `find` static method on empty extending class', function () {
+      assert.throw(() => {
+        // eslint-disable-next-line no-unused-vars
+        const _ = User.findById(1);
+      }, NotImplementedError);
+    });
 
     it('should create a new Model instance with necessary properties', function () {
       const user = new User();
 
+      assert.typeOf(user.isNew, 'boolean');
+      assert.typeOf(user.isDirty, 'boolean');
       assert(user.isNew === true);
       assert(user.isDirty === false);
       assert.property(user, User.idField);
       //
     });
 
+    it('should have methods on the extending class instance', function () {
+      const user = new User();
+
+      assert.typeOf(user.save, 'function');
+      // TODO
+    });
+
     //
   });
 
-  // TODO Write tests
+  //
 });
