@@ -14,6 +14,15 @@
       "program": "${workspaceFolder}/test/index.js",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "dev",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/index.js",
     }
   ]
 }

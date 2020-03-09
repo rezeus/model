@@ -1,15 +1,12 @@
 'use strict';
 
+const _ = require('underscore');
+
 const Model = require('../../lib/Model');
 
 // Memory data store. [idFieldName] -> record
 /** @type {Map<String, Object>} */
 const mem = new Map();
-
-mem.set('id1', { id: 'id1', foo: 'bar' });
-mem.set('id2', false);
-mem.set('id3', { id: 'id3', baz: 'qux' });
-mem.set('id4', { id: 'id4', quux: false });
 
 class MemoryModel extends Model {
   constructor() {
@@ -21,14 +18,28 @@ class MemoryModel extends Model {
   }
 
   persist() {
-    if (this.isNew) {
-      const json = this.toJSON();
-      mem.set(this.id, json);
-    } else if (this.isDirty) {
-      const changes = this.getChanges();
+    return new Promise((resolve/* , reject */) => {
+      if (this.isNew) {
+        // Create
 
-      // TODO
-    }
+        const json = this.toJSON();
+        mem.set(this.id, json);
+
+        resolve();
+      } else if (this.isDirty) {
+        // Update
+
+        const changes = _.pick(this.toJSON(), this.getChangedFieldNames());
+
+        const newFields = {
+          ...mem.get(this.id),
+          ...changes,
+        };
+        mem.set(this.id, newFields);
+
+        resolve();
+      }
+    });
   }
 
   static find(predicates = {}) {
@@ -77,7 +88,8 @@ class MemoryModel extends Model {
   }
 
   static deleteById(id) {
-    // TODO
+    // NOTE Return true if deleted, false otherwise (e.g. wasn't exist in the first place)
+    return mem.delete(id);
   }
 }
 

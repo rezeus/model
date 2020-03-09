@@ -2,6 +2,15 @@
 
 Generic, ActiveRecord-like base model class.
 
+## Hooks
+
+Hooks will be called in this order;
+
+1. `beforeCreate`
+1. `beforeSave`
+1. `afterSave`
+1. `afterCreate`
+
 ## FAQ
 
 Below you can find error messages and their explanations.

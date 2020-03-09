@@ -46,11 +46,11 @@ describe('Example Memory Model Tests', function () {
     it('0', function () {
       const john = new User();
 
-      john.email = 'john@does.co';
+      john.email = 'not.john@does.co';
 
-      const changesBeforeSave = john.getChanges();
+      const changesBeforeSave = john.getChangedFieldNames();
       john.save();
-      const changesAfterSave = john.getChanges();
+      const changesAfterSave = john.getChangedFieldNames();
 
       assert(changesBeforeSave.length === 1 && changesBeforeSave[0] === 'email', 'Changes was not calculated correctly.');
       assert(changesAfterSave.length === 0, 'Changes was not reset.');
@@ -61,22 +61,48 @@ describe('Example Memory Model Tests', function () {
       lastCreatedId = john.id;
     });
 
-    it('1', function () {
-      const john = User.findById(lastCreatedId);
+    it('1', function (done) {
+      setTimeout(() => {
+        const john = User.findById(lastCreatedId);
 
-      john.email = 'john@does.co';
+        john.email = 'john@does.co';
 
-      const changesBeforeSave = john.getChanges();
-      john.save();
-      const changesAfterSave = john.getChanges();
+        const changesBeforeSave = john.getChangedFieldNames();
+        john.save();
+        const changesAfterSave = john.getChangedFieldNames();
 
-      assert(changesBeforeSave.length === 1 && changesBeforeSave[0] === 'email', 'Changes was not calculated correctly.');
-      assert(changesAfterSave.length === 0, 'Changes was not reset.');
+        assert(changesBeforeSave.length === 1 && changesBeforeSave[0] === 'email', 'Changes was not calculated correctly.');
+        assert(changesAfterSave.length === 0, 'Changes was not reset.');
 
-      // Ensure that it's ID wasn't changed after save
-      assert.equal(lastCreatedId, john.id);
+        // Ensure that it's ID wasn't changed after save
+        assert.equal(lastCreatedId, john.id);
 
-      assert(john.updatedAt > john.createdAt);
+        assert(john.updatedAt > john.createdAt);
+        assert(john.id);
+        assert(mem.has(john.id));
+
+        const johnOnDataStore = mem.get(john.id);
+        assert(johnOnDataStore.email, john.email);
+
+        done();
+      }, 1000);
+    }).slow(1200);
+
+    it('2', function () {
+      const wasJohnDeleted = User.deleteById(lastCreatedId);
+
+      assert.isTrue(wasJohnDeleted);
+      assert.isFalse(mem.has(lastCreatedId));
+    });
+
+    it('2-2', function () {
+      assert.isFalse(mem.has(lastCreatedId));
+
+      const wasJohnDeleted = User.deleteById(lastCreatedId);
+
+      assert.isFalse(wasJohnDeleted);
+
+      lastCreatedId = undefined;
     });
   });
 

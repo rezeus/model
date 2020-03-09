@@ -31,6 +31,8 @@ module.exports = {
       ignoreStrings: true,
       ignoreTemplateLiterals: true,
     }],
+
+    'import/no-extraneous-dependencies': 'off',
   },
   overrides: [
     {
