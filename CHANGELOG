@@ -1,2 +1,24 @@
-1.0.1 Add private field feature
-1.0.0 Initial commit
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+Please note until 1.1.0 all the additions treated as patches (i.e. incrementing the 3rd, PATCH version of Semantic Versioning). Version 1.1.0 is going to be API-stable release.
+
+## [1.0.2] - 2020-03-10
+### Added
+- `existsById` static method for Model classes to implement along with other necessary static methods.
+- [Hooks](https://github.com/rezeus/model/README.md#hooks) for running arbitrary code on instance lifecycle.
+- `setFields` method for mass updating the instance fields.
+
+## [1.0.1] - 2020-03-10
+### Added
+- Private fields feature to exclude fields from JSON representation (i.e. result of `Model.toJSON()`).
+
+## [1.0.0] - 2020-03-09
+Initial commit
+
+[1.0.2]: https://github.com/rezeus/model/compare/v1.0.1...v1.0.2
+[1.0.1]: https://github.com/rezeus/model/compare/v1.0.0...v1.0.1
+[1.0.0]: https://github.com/rezeus/model/tree/1f9be5e9f28dd9d5b05cf088e805120b87fc85c2

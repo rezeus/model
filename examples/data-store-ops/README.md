@@ -4,6 +4,7 @@ Since Model class is data store agnostic extending class MUST provide it's own d
 
  - `find`
  - `findById`
+ - `existsById`
  - `updateById`
  - `deleteById`
 

@@ -72,6 +72,10 @@ class MemoryModel extends Model {
     return this.find({ id });
   }
 
+  static existsById(id) {
+    return mem.has(id);
+  }
+
   static updateById(id, updates) {
     let combined;
 

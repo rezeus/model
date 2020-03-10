@@ -6,10 +6,13 @@ Generic, ActiveRecord-like base model class.
 
 Hooks will be called in this order;
 
-1. `beforeCreate`
+1. `beforeCreate` / `beforeUpdate`
 1. `beforeSave`
 1. `afterSave`
-1. `afterCreate`
+1. `afterCreate` / `afterUpdate`
+
+> Note: `beforeUpdate` and `afterUpdate` hooks MUST be **manually** invoked by the extending class **if** the static method is going to be used to update the instance by it's ID (i.e. `updateById`). This class is the one which implements the data store operations (e.g. `MemoryModel` class from examples) - for other extending classes (e.g. `User`, `Post`, `Tag` classes from examples).
+> Other hooks are free from this requirement.
 
 ## FAQ
 
