@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Please note until 1.1.0 all the additions treated as patches (i.e. incrementing the 3rd, PATCH version of Semantic Versioning). Version 1.1.0 is going to be API-stable release.
 
+## [1.0.3] - 2020-03-13
+### Added
+- Introspection code to get setter names (writable field names)
+- "private fields" by prefixing the field name with underscore (preferably via `.setField`)
+- Debugger statement to this edge-case; when trying to save an instance which is not new or dirty
+
+### Changes
+- Use the field's setter whenever possible
+
 ## [1.0.2] - 2020-03-10
 ### Added
 - `existsById` static method for Model classes to implement along with other necessary static methods.
@@ -19,6 +28,7 @@ Please note until 1.1.0 all the additions treated as patches (i.e. incrementing 
 ## [1.0.0] - 2020-03-09
 Initial commit
 
+[1.0.3]: https://github.com/rezeus/model/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/rezeus/model/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/rezeus/model/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/rezeus/model/tree/1f9be5e9f28dd9d5b05cf088e805120b87fc85c2
