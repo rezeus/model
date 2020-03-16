@@ -53,13 +53,26 @@ class User extends MemoryModel {
 
   /** @param {String} newVal */
   set password(newVal) {
+    // TODO TR bunu bir de hook ile dene, eğer çalışırsa en alttaki satırı uncomment
     this.setField('password', bcrypt.hashSync(newVal, 12));
+    // return this.setField('password', newVal);
   }
 
   // NOTE Classes may have define their own methods
+  //
   isPasswordValid(password) {
-    return bcrypt.compareSync(password, this.password);
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, this.password, (err, same) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(same);
+        }
+      });
+    });
   }
+
+  //
 
   // Virtual Fields
   //

@@ -14,6 +14,12 @@ Hooks will be called in this order;
 > Note: `beforeUpdate` and `afterUpdate` hooks MUST be **manually** invoked by the extending class **if** the static method is going to be used to update the instance by it's ID (i.e. `updateById`). This class is the one which implements the data store operations (e.g. `MemoryModel` class from examples) - for other extending classes (e.g. `User`, `Post`, `Tag` classes from examples).
 > Other hooks are free from this requirement.
 
+## Recipes
+
+### Virtual Fields
+
+TR virtual field lar setField ve getField metodları kullanılarak yapılabilir. örneğin bir kullanıcı kaydının firstName ve lastName özellikleri varsa name virtual field i eklenebilir (many-classes örnek dosyasındaki User modelinde yapıldığı gibi) - ancak burada şöyle bir durum var; getter'ı private fields'tan (`this[PRIV].fields`) veri okumuyor, eğer okunması gereken bir durum varsa (yani getter'ın return değeri on-the-fly hesaplanmıyorsa) setField'a field name'i gönderirken '_' ile prefixle (e.g. `this.setField('_not_presisted_field_name', 13);`)
+
 ## FAQ
 
 Below you can find error messages and their explanations.

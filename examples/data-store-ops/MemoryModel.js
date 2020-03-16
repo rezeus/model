@@ -50,6 +50,7 @@ class MemoryModel extends Model {
       return this.fromJSON(foundFields);
     }
 
+    // FIXME As of now supporting only 'id' as predicate, broaden the supported predicates
     // let id;
     // [...mem.entries()].findIndex(([cid, cval]) => {
     //   if (cval.baz === 'qux') {
