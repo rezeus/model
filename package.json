@@ -1,6 +1,6 @@
 {
   "name": "@rezeus/model",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Generic, ActiveRecord-like base model class.",
   "keywords": [],
   "homepage": "https://github.com/rezeus/model",
