@@ -6,12 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Please note until 1.1.0 all the additions treated as patches (i.e. incrementing the 3rd, PATCH version of Semantic Versioning). Version 1.1.0 is going to be API-stable release.
 
+## [1.0.6] - 2020-03-21
+### Added
+- Add a static getter to obtain setter names of the extending class
+
 ## [1.0.5] - 2020-03-20
 ### Changed
 - Bump the vulnerable dependency version (upgraded to minimist@^1.2.2)
 - Change a few variables' name to suit a broader library better
 
-## [1.0.5] - 2020-03-20
+## [1.0.4] - 2020-03-18
 ### Changed
 - Add a flag to use or not to use JSON exclusion list when returning JSON
 
