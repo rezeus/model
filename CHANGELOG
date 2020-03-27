@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Please note until 1.1.0 all the additions treated as patches (i.e. incrementing the 3rd, PATCH version of Semantic Versioning). Version 1.1.0 is going to be API-stable release.
 
+## [1.0.8] - 2020-03-27
+### Changed
+- Fix the model to invoke the after update hook properly
+
 ## [1.0.6] - 2020-03-21
 ### Added
 - Add a static getter to obtain setter names of the extending class
